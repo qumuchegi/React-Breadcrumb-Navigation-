@@ -1,0 +1,15 @@
+#links{
+   display: flex;
+   justify-content: center;
+}
+#links a{
+    margin:3%
+}
+h1{
+    text-align: center
+}
+img.tubiao{
+    widows: 50%;
+    margin-left:25%;
+    
+}

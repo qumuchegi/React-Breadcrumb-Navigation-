@@ -1,0 +1,56 @@
+{
+  "name": "react-breadcrumb-navigation",
+  "version": "1.0.7",
+  "description": "可以在React项目中使用的面包屑组件",
+  "main": "lib/main.bundle.js",
+  "jsnext:main": "src/index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --open --config webpack.dev.config.js",
+    "build": "webpack --config webpack.pro.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qumuchegi/React-Breadcrumb-Navigation-.git"
+  },
+  "keywords": [
+    "React",
+    "Breadcrumb-Navigation",
+    "navigation"
+  ],
+  "author": "qumuchegi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qumuchegi/React-Breadcrumb-Navigation-/issues"
+  },
+  "homepage": "https://github.com/qumuchegi/React-Breadcrumb-Navigation-#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-runtime": "^6.26.0",
+    "clean-webpack-plugin": "^2.0.2",
+    "css-loader": "^2.1.1",
+    "file-loader": "^4.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.7.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "style-loader": "^0.23.1",
+    "url-loader": "^2.0.0",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.4.1",
+    "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "history": "^4.9.0",
+    "html2canvas": "^1.0.0-rc.3",
+    "styled-components": "^4.2.0",
+    "uuid": "^3.3.2",
+    "zangodb": "^1.0.7"
+  }
+}
