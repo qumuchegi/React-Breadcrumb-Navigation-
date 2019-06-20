@@ -5,7 +5,9 @@ const Breadcrumb = styled.div`
     justify-content: flex-start;
     align-items:center;
     position:relative;
-    height:2rem;
+    box-sizing:border-box;
+    margin:1rem;
+    height:${props=>props.height}
 `
 const BreadcrumbItem = styled.div`
     display:inline-block;
@@ -50,8 +52,6 @@ const BreadcrumbItem = styled.div`
 `
 const Title = styled.span`
    
-    font-size:${props=>props.titleSize};
-   
     &:hover{
         color:${props=>props.hoverTitleColor};
         
@@ -62,6 +62,7 @@ const LeftArrow = styled.div`
      
     >img{
         transform:rotate(180deg);
+
         height:${props=>props.height};
         
     }

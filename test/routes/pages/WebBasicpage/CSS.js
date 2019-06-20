@@ -15,9 +15,9 @@ export default function CSS(props){
                   bgColor='rgb(92,194,248)'
                   hoverBgColor='white'
                   titleColor='white'
-                  titleSize='1.2rem'
                   hoverTitleColor='rgb(234,123,123)'
                   blocksWidth='10rem'
+                  height = '1.2rem'
                   />
             </div>
             <h1>CSS</h1>

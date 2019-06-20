@@ -14,9 +14,9 @@ export default function StateMngHome(props){
                   bgColor='rgb(92,194,248)'
                   hoverBgColor='white'
                   titleColor='white'
-                  titleSize='1.2rem'
                   hoverTitleColor='rgb(234,123,123)'
                   blocksWidth='10rem'
+                  height = '1.2rem'
                   />
             </div>
             <h1>状态管理 首页</h1>

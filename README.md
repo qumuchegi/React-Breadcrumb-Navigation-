@@ -99,7 +99,7 @@ history | 使用 [history](https://www.npmjs.com/package/history)管理历史，
 bgColor | 面包屑组件背景色
 hoverBgColor | 鼠标悬停时的背景色
 titleColor | 面包屑导航组件上页面标题的字体颜色
-titleSize | 面包屑导航组件上页面标题的字体大小
+height | 面包屑导航组件上在页面所占高度
 hoverTitleColor | 鼠标悬停再面包屑导航组件上页面标题上时字体颜色
 blocksWidth | 将面包屑导航组件全部历史显示出来时组件的宽度
 

@@ -31,9 +31,9 @@ export const BreadcrumbUI=(
         hoverBgColor,
         hoverTitleColor,
         titleColor,
-        titleSize,
         blocksWidth,
-         
+        height,
+
         showPageSnapshot,
         showLast,
         showNext,
@@ -45,14 +45,14 @@ export const BreadcrumbUI=(
     }
 
 ) =><div> 
-                <Breadcrumb id='breadcrumbs'>
-                    <ClearHistoryBtn height={titleSize}>
+                <Breadcrumb id='breadcrumbs' height={ height }>
+                    <ClearHistoryBtn height={ height}>
                         <img src={clear} alt=' ' onClick={()=>clearHistory()}></img>
                     </ClearHistoryBtn>
-                    <ShowHistoryMode height={titleSize}>
+                    <ShowHistoryMode height={ height} className={showMode!=='blocks'?'center':'top'}>
                         <img src={showMode==='blocks' ? blocks:list} alt = '' onClick={()=>changeShowMode(showMode)}></img>
                     </ShowHistoryMode>
-                    <LeftArrow height={titleSize} className={showMode === 'blocks' ? 'hide':null}>
+                    <LeftArrow  height={ height} className={showMode === 'blocks' ? 'hide':null}>
                         {
                             pageNum===0 ?
                             <img src={arrow2} alt='' ></img>
@@ -72,7 +72,6 @@ export const BreadcrumbUI=(
                          .map((page,index) => 
 
                             <BreadcrumbItem key={uuid()} 
-                                titleSize={titleSize}
                                 bgColor={bgColor}
                                 titleColor={titleColor}
                                 hoverBgColor={hoverBgColor}
@@ -80,7 +79,6 @@ export const BreadcrumbUI=(
                               
                                >
                                 <Title hoverTitleColor={hoverTitleColor} 
-                                       titleSize={titleSize}
                                        onClick={()=>history.push({
                                            pathname:page.path
                                        })}
@@ -96,7 +94,7 @@ export const BreadcrumbUI=(
                         )
                     }
                     </ItemContainer>
-                    <RightArrow height={titleSize} className={showMode === 'blocks' ? 'hide':null}> 
+                    <RightArrow  height={ height} className={showMode === 'blocks' ? 'hide':null}> 
                         {
                             (pageNum+1)*visibleItemsCount >=  historyPages.length ?
                             <img src={arrow2} alt='' ></img>
