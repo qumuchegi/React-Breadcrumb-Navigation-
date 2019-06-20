@@ -15,7 +15,7 @@ export default function reactRouter(props){
                   hoverBgColor='white'
                   titleColor='white'
                   hoverTitleColor='rgb(234,123,123)'
-                  blocksWidth='10rem'
+                  blocksWidth='30rem'
                   height = '1.2rem'
                   />            </div>
             <h1>React Router</h1>

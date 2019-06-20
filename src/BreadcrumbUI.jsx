@@ -76,7 +76,7 @@ export const BreadcrumbUI=(
                                 titleColor={titleColor}
                                 hoverBgColor={hoverBgColor}
                                 onMouseOver={()=>showPageSnapshot(page.pageSnapshot,index)}
-                              
+                                height={ height}
                                >
                                 <Title hoverTitleColor={hoverTitleColor} 
                                        onClick={()=>history.push({

@@ -7,14 +7,18 @@ const Breadcrumb = styled.div`
     position:relative;
     box-sizing:border-box;
     margin:1rem;
-    height:${props=>props.height}
+    height:${props=>props.height};
+   
+ 
 `
 const BreadcrumbItem = styled.div`
     display:inline-block;
-    box-sizing: border-box;
+    box-sizing: content-box;
     position: relative;
     margin:0.3rem;
     padding:0.3rem;
+
+    height: ${props=>props.height};
     background-color:${props=>props.bgColor};
     color:${props=>props.titleColor};
     border-radius:0.2rem;
@@ -130,6 +134,8 @@ const ItemContainer  = styled.div`
         width:${props=>props.blocksWidth};
         flex-wrap:wrap;
         border:solid 1px ${props=>props.borderColor};
+        border-radius:3px;
+        background-color:white;
     }
 
 
