@@ -60,5 +60,5 @@ module.exports = {
          
          
     ],
-    externals:['react','react-dom']
+    externals:['react','react-dom','history']
 }
