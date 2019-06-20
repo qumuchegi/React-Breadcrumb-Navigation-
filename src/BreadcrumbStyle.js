@@ -5,6 +5,7 @@ const Breadcrumb = styled.div`
     justify-content: flex-start;
     align-items:center;
     position:relative;
+    height:2rem;
 `
 const BreadcrumbItem = styled.div`
     display:inline-block;
@@ -23,7 +24,7 @@ const BreadcrumbItem = styled.div`
         border:solid 0.1rem ${props=>props.bgColor};
         background-color: ${props=>props.hoverBgColor};
     }
-    
+
     >.page-snapshot{
         display:none
     }
@@ -64,6 +65,9 @@ const LeftArrow = styled.div`
         height:${props=>props.height};
         
     }
+    &.hide{
+        display:none;
+    }
 `
 
 const RightArrow = styled.div`
@@ -71,6 +75,9 @@ const RightArrow = styled.div`
     >img{
         height:${props=>props.height};
         
+    }
+    &.hide{
+        display:none;
     }
 `
 const RemoveButton = styled.div`
@@ -94,6 +101,7 @@ const ClearHistoryBtn = styled.div`
   >img:hover{
       background-color:#eee
   }
+   
 `
 
 const  ShowHistoryMode = styled.div`
@@ -105,37 +113,27 @@ const  ShowHistoryMode = styled.div`
   >img:hover{
       background-color:#eee
   }
+   
 `
+const ItemContainer  = styled.div`
 
-const HideBlocksMode = styled.div`
-    &#hide-blocks{
-        transition:top 1s,opacity 1s;
-        top:-100%;
-        /*transform:translateY(-100%);*/
-        position:absolute;
-        z-index:-9999;
-        opacity:0;
-        left:0;
-        width:${props=>props.blocksWidth};
+    display:flex;
+    justify-content:flex-start;
+    &.multi-page-mode{
+         
     }
-    &#show-blocks{
-        display:flex;
+    &.blocks-mode{
         position:absolute;
-        z-index:0;
-        left:0;
-        width:${props=>props.blocksWidth};
-        background-color:white;
-        transition:top 1s,opacity 1s;
         top:100%;
-        opacity:1;
-        /*transform:translateY(0%);*/
+        left:0;
+        width:${props=>props.blocksWidth};
         flex-wrap:wrap;
-        justify-content:flex-start;
-        border:solid 0.6px ${props=>props.borderColor};
-        border-radius:0 3px 3px 3px;
+        border:solid 1px ${props=>props.borderColor};
     }
 
+
 `
+
 export  {
     Breadcrumb,
     BreadcrumbItem,
@@ -145,5 +143,6 @@ export  {
     RemoveButton,
     ClearHistoryBtn,
     ShowHistoryMode,
-    HideBlocksMode
+    ItemContainer 
+    
 }

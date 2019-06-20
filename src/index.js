@@ -42,7 +42,7 @@ export default function ReactBreadcrumbNavigation(
     useEffect(() => {
         
         //console.log(window.document)
-        findHistory()
+        refreshHistory()
 
         html2Canvas(
             document.body
@@ -58,7 +58,7 @@ export default function ReactBreadcrumbNavigation(
         })
     }, [title])
 
-    async function findHistory(){
+    async function refreshHistory(){
         let historyPages = await find_history()
         setHistoryPages(historyPages)
     }
@@ -85,7 +85,7 @@ export default function ReactBreadcrumbNavigation(
 
     function onBlob(imgBlob,title,path){
         addHistory(title, path, imgBlob)
-        findHistory()// 更新历史
+        refreshHistory()// 更新历史
     }
 
     function showLast(){
@@ -100,12 +100,12 @@ export default function ReactBreadcrumbNavigation(
     
     function deleteAhistory(title,path){
         deleteAHistory(title,path)
-        findHistory()// 更新历史
+        refreshHistory()// 更新历史
     }
 
     function clearHistory(){
         deleteAHistory()
-        findHistory()// 更新历史
+        refreshHistory()// 更新历史
     }
 
     function changeShowMode(prevMode){
