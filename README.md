@@ -4,9 +4,6 @@ React-Breadcrumb-Navigation 是一个面包屑导航（BreadcrumbNavigation）�
 
 [gh-pages](https://qumuchegi.github.io/React-Breadcrumb-Navigation-/)
 
-demo演示：
-
-![](./Pics/breadcrumbdemo.gif)
 
 [npm](https://www.npmjs.com/package/react-breadcrumb-navigation)
 
