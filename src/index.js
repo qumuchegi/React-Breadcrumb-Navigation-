@@ -42,7 +42,7 @@ export default function ReactBreadcrumbNavigation(
     useEffect(() => {
         
         //console.log(window.document)
-        refreshHistory()
+       
 
         html2Canvas(
             document.body
@@ -50,13 +50,15 @@ export default function ReactBreadcrumbNavigation(
             let path = history.location.pathname
             console.log(history)
             //if(history.action === ('PUSH' || 'POP')){
-                 canvas2Image(canvas,title,path)
+            canvas2Image(canvas,title,path)
             //}
-            
+            //refreshHistory()
         }, err => {
             console.log(err)
         })
-    }, [title])
+
+     
+    }, [title,historyPages.length])
 
     async function refreshHistory(){
         let historyPages = await find_history()

@@ -134,6 +134,7 @@ const ItemContainer  = styled.div`
     }
     &.blocks-mode{
         position:absolute;
+        z-index:10000000;
         top:100%;
         left:0;
         width:${props=>props.blocksWidth};
