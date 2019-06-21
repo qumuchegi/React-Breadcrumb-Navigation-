@@ -1,8 +1,8 @@
 # React-Breadcrumb-Navigation
 
-React-Breadcrumb-Navigation 是一个面包屑导航（BreadcrumbNavigation）组件.用于展示用户浏览历史，组件为用户提供页面快照，便于用户一步回退到之前的页面，不用再按原来的路径到达想退回的页面。 在 React 项目中需要与 [react-router](https://www.npmjs.com/package/react-router) 一起使用,。
+React-Breadcrumb-Navigation 是一个面包屑导航（BreadcrumbNavigation）组件.用于展示用户浏览历史，组件为用户提供页面快照，便于用户一步回退到之前的页面，不用再按原来的路径到达想退回的页面。 在 React 项目中需要与 [react-router](https://www.npmjs.com/package/react-router) 一起使用。
 
-实例：[demo](https://github.com/qumuchegi/React-Breadcrumb-Navigation-/tree/master/test)  
+实例：[demo](https://qumuchegi.github.io/home)  
 
 [gh-pages](https://qumuchegi.github.io/React-Breadcrumb-Navigation-/)
 
