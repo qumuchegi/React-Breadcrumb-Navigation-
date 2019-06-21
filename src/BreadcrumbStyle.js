@@ -47,7 +47,7 @@ const BreadcrumbItem = styled.div`
         border-radius: 0 2px 2px 2px;
     }
 
-    [alt='appended-snapshot-img']{
+    [alt='加载中 。。。']{
         width:20rem;
     }
     &:hover img[class='remove-botton']{

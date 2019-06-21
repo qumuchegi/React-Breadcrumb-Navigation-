@@ -19,29 +19,11 @@ module.exports = {
         rules:[
             {
                 test:/\.(js)|(jsx)$/,
-                include:[path.resolve(__dirname,'test'),path.resolve(__dirname,'src')],
-                exclude:path.resolve(__dirname,'node_modules'),
+                include:[path.resolve(__dirname,'src')],
+                exclude:[path.resolve(__dirname,'node_modules'),path.resolve(__dirname,'test')],
                 use:{
                     loader:'babel-loader'
                 }
-            },
-            {
-                test:/\.css$/,
-                include:path.resolve(__dirname,'src'),
-                exclude:path.resolve(__dirname,'node_modules'),
-                use:[
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                          // you can specify a publicPath here
-                          // by default it uses publicPath in webpackOptions.output
-                          publicPath: path.resolve(__dirname,'Dev-dist'),
-                          filename:  '[name].[hash].css',
-                          hmr: process.env.NODE_ENV === 'development',
-                        },
-                      },
-                      'css-loader',
-                ]
             },
             {
                 test:/.(png|jpeg|gif|jpg)/i,
@@ -51,7 +33,8 @@ module.exports = {
                     'url-loader'
                 ]
             }
-        ]
+        ],
+       
     },
     resolve:{
         extensions:['.js','.jsx']
