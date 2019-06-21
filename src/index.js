@@ -14,6 +14,7 @@ const visibleHistoryReducer=(state, action) => { // 管理面包屑翻页页数
 
  
 export default function ReactBreadcrumbNavigation(
+   
     {
         visibleItemsCount,// 一次显示多少条历史
         history,
@@ -26,7 +27,7 @@ export default function ReactBreadcrumbNavigation(
         height,
         itemWidth,
     } ) {
-
+    var documentLoadTimer
     const {
             add_history,
             deleteAHistory,
@@ -43,21 +44,28 @@ export default function ReactBreadcrumbNavigation(
         
         //console.log(window.document)
        
-        window.onload = // 页面加载完成之后再拍照，以免缺少一些需要异步动态渲染的部分
-        html2Canvas(
-            document.body
-        ).then(async canvas => {
-            let path = history.location.pathname
-            console.log(history)
-            //if(history.action === ('PUSH' || 'POP')){
-            canvas2Image(canvas,title,path)
-            //}
-            //refreshHistory()
-        }, err => {
-            console.log(err)
-        })
-
-     
+        //页面加载完成之后再拍照，以免缺少一些需要异步动态渲染的部分    
+        documentLoadTimer =  setTimeout(
+            ()=>{
+                html2Canvas(
+                    document.body
+                ).then(async canvas => {
+                    let path = history.location.pathname
+                    console.log(history)
+                    //if(history.action === ('PUSH' || 'POP')){
+                    canvas2Image(canvas,title,path)
+                    //}
+                    //refreshHistory()
+                }, err => {
+                    console.log(err)
+                })
+                
+            },
+            2000
+        )
+         return ()=>{
+             documentLoadTimer = null
+         }
     }, [historyPages.length])
 
     async function refreshHistory(){
