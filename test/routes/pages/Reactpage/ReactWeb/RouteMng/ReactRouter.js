@@ -17,6 +17,7 @@ export default function reactRouter(props){
                   hoverTitleColor='rgb(234,123,123)'
                   blocksWidth='30rem'
                   height = '1.2rem'
+                  itemWidth = '3rem'
                   />            </div>
             <h1>React Router</h1>
             <img src={Reactrouterimg} alt = '' className='tubiao'></img>

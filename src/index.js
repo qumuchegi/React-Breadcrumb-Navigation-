@@ -23,7 +23,8 @@ export default function ReactBreadcrumbNavigation(
         titleColor,
         hoverTitleColor,
         blocksWidth,
-        height
+        height,
+        itemWidth,
     } ) {
 
     const {
@@ -132,6 +133,7 @@ export default function ReactBreadcrumbNavigation(
                 showMode = {showMode}
                 changeShowMode = {changeShowMode}
                 height = { height}
+                itemWidth = {itemWidth}
             ></BreadcrumbUI>
     )
 }

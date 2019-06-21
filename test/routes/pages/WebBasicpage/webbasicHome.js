@@ -11,7 +11,7 @@ export default class WebbasicHome extends Component{
     render(){
     return(
         <div>
-            <div>
+            <div width='5rem'>
                 <ReactBreadcrumbNavigation 
                   
                   visibleItemsCount = {3}
@@ -19,10 +19,11 @@ export default class WebbasicHome extends Component{
                   history={this.props.history} 
                   bgColor='rgb(92,194,248)'
                   hoverBgColor='white'
-                  titleColor='white'
+                  titleColor='black'
                   hoverTitleColor='rgb(234,123,123)'
                   blocksWidth='10rem'
                   height = '1.2rem'
+                  itemWidth = '3rem'
                   />
             </div>
             <h1>web 基础</h1>

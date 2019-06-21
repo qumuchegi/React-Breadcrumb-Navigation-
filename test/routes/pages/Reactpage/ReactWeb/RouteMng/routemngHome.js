@@ -17,6 +17,7 @@ export default function RouterMngHome(props){
                   hoverTitleColor='rgb(234,123,123)'
                   blocksWidthh='10rem'
                   height = '1.2rem'
+                  itemWidth = '3rem'
                   />            </div>
             <h1>路由管理 首页</h1>
             <div id='links'>

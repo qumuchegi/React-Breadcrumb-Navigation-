@@ -33,6 +33,7 @@ export const BreadcrumbUI=(
         titleColor,
         blocksWidth,
         height,
+        itemWidth,
 
         showPageSnapshot,
         showLast,
@@ -79,6 +80,7 @@ export const BreadcrumbUI=(
                                 height={ height}
                                >
                                 <Title hoverTitleColor={hoverTitleColor} 
+                                       itemWidth={ showMode !== 'blocks' ? itemWidth:null}
                                        onClick={()=>history.push({
                                            pathname:page.path
                                        })}

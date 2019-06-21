@@ -17,6 +17,7 @@ export default function Router5(props){
                   hoverTitleColor='rgb(234,123,123)'
                   blocksWidth='10rem'
                   height = '1.2rem'
+                  itemWidth = '3rem'
                   />            </div>
             <h1>Router 5</h1>
             <img src={router5img} alt = '' className='tubiao'></img>

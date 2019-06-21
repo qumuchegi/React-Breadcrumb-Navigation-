@@ -38,7 +38,7 @@ export function page1(props){
                 titleColor = 'white'
                 titleSize = '1.2rem'
                 hoverTitleColor = 'rgb(234,123,123)'
-                 
+                itemWidth = '3rem'
             />
         </div>
     )
@@ -58,7 +58,7 @@ export function page2(props){
                 titleColor = 'white'
                 titleSize = '1.2rem'
                 hoverTitleColor = 'rgb(234,123,123)'
-                 
+                itemWidth = '3rem'
             />
         </div>
     )
@@ -120,6 +120,7 @@ bgColor | 面包屑组件背景色
 hoverBgColor | 鼠标悬停时的背景色
 titleColor | 面包屑导航组件上页面标题的字体颜色
 height | 必须，面包屑导航组件上在页面所占高度
+itemWidth | 必须，以分页形式展示历史页面时每个标题的宽度
 hoverTitleColor | 鼠标悬停再面包屑导航组件上页面标题上时字体颜色
 blocksWidth | 将面包屑导航组件全部历史显示出来时组件的宽度
 

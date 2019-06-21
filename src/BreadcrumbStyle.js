@@ -8,16 +8,16 @@ const Breadcrumb = styled.div`
     box-sizing:border-box;
     margin:1rem;
     height:${props=>props.height};
-   
- 
 `
 const BreadcrumbItem = styled.div`
+ 
+     
+
     display:inline-block;
     box-sizing: content-box;
     position: relative;
     margin:0.3rem;
     padding:0.3rem;
-
     height: ${props=>props.height};
     background-color:${props=>props.bgColor};
     color:${props=>props.titleColor};
@@ -54,12 +54,17 @@ const BreadcrumbItem = styled.div`
         display:block;
     }
 `
-const Title = styled.span`
-   
+const Title = styled.div`
+    width:${props=>props.itemWidth};
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    
     &:hover{
         color:${props=>props.hoverTitleColor};
         
     }
+     
 `
 
 const LeftArrow = styled.div`

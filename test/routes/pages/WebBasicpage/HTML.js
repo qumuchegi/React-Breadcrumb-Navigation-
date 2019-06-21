@@ -18,6 +18,7 @@ export default function HTML(props){
                   hoverTitleColor='rgb(234,123,123)'
                   blocksWidth='10rem'
                   height = '1.2rem'
+                  itemWidth = '3rem'
                   />
             </div>
             <h1>HTML</h1>
