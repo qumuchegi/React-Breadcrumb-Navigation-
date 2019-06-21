@@ -1,6 +1,6 @@
 # React-Breadcrumb-Navigation
 
-React-Breadcrumb-Navigation 是一个面包屑导航（BreadcrumbNavigation）组件.用于展示用户浏览历史，组件为用户提供页面快照，便于用户一步回退到之前的页面，不用再按原来的路径到达想退回的页面。 在 React 项目中需要与 [react-router](https://www.npmjs.com/package/react-router) 、 [history](https://www.npmjs.com/package/history) 一起使用。
+React-Breadcrumb-Navigation 是一个面包屑导航（BreadcrumbNavigation）组件.用于展示用户浏览历史，组件为用户提供页面快照，便于用户一步回退到之前的页面，不用再按原来的路径到达想退回的页面。 在 React 项目中需要与 [react-router](https://www.npmjs.com/package/react-router) 一起使用,。
 
 实例：[demo](https://github.com/qumuchegi/React-Breadcrumb-Navigation-/tree/master/test)  
 
@@ -68,12 +68,13 @@ export function page2(props){
 ```
 
 ```js
+// 配置 history 方法 1 :
 import createBrowserHistory from 'history/createBrowserHistory'
 const history = createBrowserHistory()
 
 function App(){
     return (
-         <Router history={history} id='app-body'>
+         <Router history={history}>
            <Switch>
                <Route path = '/page1' component = {page1}/>
                <Route path = '/page2' component = {page2}/>
@@ -82,7 +83,24 @@ function App(){
     )
  
   }
-  
+
+// 配置 history 方法 2 :
+/*
+
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+function App(){
+    return (
+         <Router>
+           <Switch>
+               <Route path = '/page1' component = {page1}/>
+               <Route path = '/page2' component = {page2}/>
+           </Switch>
+         </Router>
+    )
+ 
+  }
+
+*/
 ReactDOM.render(
     <App/>,
     document.getElementById('root')
@@ -97,7 +115,7 @@ ReactDOM.render(
 :-: | :-:
 visibleItemsCount | 必须，面包屑导航栏目分页展示，一页展示的数目为 visibleItemsCount
 title | 必须，页面标题
-history | 必须，使用 [history](https://www.npmjs.com/package/history)管理历史，从中获取页面跳转信息,
+history | 必须，获取浏览器的历史。可以使用 [history](https://www.npmjs.com/package/history) 管理历史，从中获取页面跳转信息。也可以直接使用react-router 的 `BrowserRouter`。两种方法已经在上述示例代码给出。
 bgColor | 面包屑组件背景色
 hoverBgColor | 鼠标悬停时的背景色
 titleColor | 面包屑导航组件上页面标题的字体颜色
