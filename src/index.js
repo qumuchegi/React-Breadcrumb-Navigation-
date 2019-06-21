@@ -43,7 +43,7 @@ export default function ReactBreadcrumbNavigation(
         
         //console.log(window.document)
        
-
+        window.onload = // 页面加载完成之后再拍照，以免缺少一些需要异步动态渲染的部分
         html2Canvas(
             document.body
         ).then(async canvas => {
@@ -58,7 +58,7 @@ export default function ReactBreadcrumbNavigation(
         })
 
      
-    }, [title,historyPages.length])
+    }, [historyPages.length])
 
     async function refreshHistory(){
         let historyPages = await find_history()

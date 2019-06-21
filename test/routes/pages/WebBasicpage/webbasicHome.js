@@ -33,6 +33,7 @@ export default class WebbasicHome extends Component{
                 <Link to='/JSpage'>JS</Link>
                 <Link to='/reacthome'>React</Link>
             </div>
+            
         </div>
     )
     }
