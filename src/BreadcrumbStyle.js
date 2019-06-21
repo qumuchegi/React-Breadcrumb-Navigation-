@@ -68,62 +68,83 @@ const Title = styled.div`
 `
 
 const LeftArrow = styled.div`
-     
-    >img{
-        transform:rotate(180deg);
 
+    display:none;
+    &.show{
+        display:block;
+    }
+    margin-left:1rem;
+    margin-right:1rem;  
+    .fas{
         height:${props=>props.height};
         
+        
     }
-    &.hide{
-        display:none;
+    .noPage{
+        color:#aaa
+    }
+    .yesPage{
+        color:${props=>props.color};
     }
 `
 
 const RightArrow = styled.div`
- 
-    >img{
-        height:${props=>props.height};
-        
+
+    display:none;
+    &.show{
+        display:block;
     }
-    &.hide{
-        display:none;
+    margin-left:1rem;
+    margin-right:1rem;  
+    transform:rotate(180deg);
+    .fas{
+        height:${props=>props.height};
+    }
+    .noPage{
+        color:#aaa
+    }
+    .yesPage{
+        color:${props=>props.color};
     }
 `
 const RemoveButton = styled.div`
-   >img{
-    position:absolute;
-    width:1rem;
-    top:-0.5rem;
-    right:-0.5rem;
-    display:none;
-   }
-
+    .fas{
+        position:absolute;
+        width:1rem;
+        top:-0.5rem;
+        right:-0.5rem;
+        color:red;
+    }
+    
     
 `
 
 const ClearHistoryBtn = styled.div`
-  >img{
-    width:${props=>props.height};
-    height: ${props=>props.height};
-    border-radius:${props=>props.height};
-  }
-  >img:hover{
-      background-color:#eee
-  }
+        margin-left:1rem;
+        margin-right:1rem;  
+  .fas{
+        color:${props=>props.color};
+        width:${props=>props.height};
+        height: ${props=>props.height};
+        border-radius:${props=>props.height};
+    }
+    .fas:hover{
+        background-color:#eee
+    }
    
 `
 
 const  ShowHistoryMode = styled.div`
->img{
+.fas{
+    color:${props=>props.color};
     width:${props=>props.height};
     margin-left:0.7rem;
     height: ${props=>props.height};
-  }
-  >img:hover{
-      background-color:#eee
-  }
-   
+}
+.fas:hover{
+    background-color:#eee
+}
+ 
 `
 const ItemContainer  = styled.div`
 

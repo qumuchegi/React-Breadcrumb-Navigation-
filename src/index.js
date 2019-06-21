@@ -40,7 +40,13 @@ export default function ReactBreadcrumbNavigation(
 
     const [visibleHistoryState, dispatch] = useReducer(visibleHistoryReducer,{pageNum:0})
     
-   
+   useEffect(() => {
+        let {scriptDom, headDom} = addIconScript()
+
+       return () => {
+           removeIconScript(scriptDom, headDom)
+       };
+   }, [])
     
     useEffect(() => {
         
@@ -73,7 +79,21 @@ export default function ReactBreadcrumbNavigation(
          }
     }, [])
  
+    function addIconScript(){
 
+        let scriptDom = document.createElement('script')
+        let headDom = document.getElementsByTagName('head')[0]
+        
+        scriptDom.src = 'https://kit.fontawesome.com/e1dd5dc490.js'
+        headDom.appendChild(scriptDom)
+
+        return {scriptDom, headDom}
+    }
+    
+    function removeIconScript(dom_removed, parentDom){
+        console.log('删除添加的script节点：')
+        parentDom.removeChild(dom_removed)
+    }
     async function refreshHistory(){
         console.log(' 更新历史')
         let historyPages = await find_history()
@@ -86,7 +106,9 @@ export default function ReactBreadcrumbNavigation(
         return res
     }
 
-    function showPageSnapshot(snapshot,index){
+    function showPageSnapshot(e,snapshot,index){
+
+        console.log(snapshot)
         let BlobReader = new FileReader()
         BlobReader.readAsDataURL(snapshot)
         BlobReader.onload = function(){
@@ -134,6 +156,12 @@ export default function ReactBreadcrumbNavigation(
         else setShowMode('horizontal')
     }
 
+    function toPage(e,path){ 
+        e.stopPropagation()
+        history.push({
+            pathname:path
+        })
+    }
     return(
         historyPages.length > 0 &&
             <BreadcrumbUI
@@ -144,6 +172,7 @@ export default function ReactBreadcrumbNavigation(
                 hoverBgColor = {hoverBgColor}
                 hoverTitleColor = {hoverTitleColor}
                 titleColor = {titleColor}
+                to = {toPage}
                 showPageSnapshot = {showPageSnapshot}
                 blocksWidth = {blocksWidth}
                 showLast = {showLast}

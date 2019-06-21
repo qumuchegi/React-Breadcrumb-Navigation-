@@ -1,13 +1,6 @@
 import uuid from 'uuid'
 import React from 'react'
-import leftArrowSrc from './imgs/arrow.png'
-import arrow2 from './imgs/arrow2.png'
-import loadingSrc from './imgs/loading.png'
-import removeSrc from './imgs/jiaochacross78.png'
-import clear from './imgs/clear.png'
-import blocks from './imgs/icons_blocks.png'
-import list from './imgs/list.png'
-
+ 
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -35,6 +28,7 @@ export const BreadcrumbUI=(
         height,
         itemWidth,
 
+        to,
         showPageSnapshot,
         showLast,
         showNext,
@@ -46,19 +40,24 @@ export const BreadcrumbUI=(
     }
 
 ) =><div> 
-                <Breadcrumb id='breadcrumbs' height={ height }>
-                    <ClearHistoryBtn height={ height}>
-                        <img src={clear} alt=' ' onClick={()=>clearHistory()}></img>
+                <Breadcrumb id='breadcrumbs' height={ height } >
+                    <ClearHistoryBtn height={ height} color={bgColor}>
+                        <i className="fas fa-eraser" onClick={()=>clearHistory()} ></i>
+                        {/*<img src={clear} alt=' ' onClick={()=>clearHistory()}></img>*/}
                     </ClearHistoryBtn>
-                    <ShowHistoryMode height={ height} className={showMode!=='blocks'?'center':'top'}>
-                        <img src={showMode==='blocks' ? blocks:list} alt = '' onClick={()=>changeShowMode(showMode)}></img>
+                    <ShowHistoryMode height={ height} className={showMode!=='blocks'?'center':'top'} color={bgColor}>
+                        <i className={showMode==='blocks'? "fas fa-th":"fas fa-th-large"} onClick={()=>changeShowMode(showMode)}></i>
+                        {/*<img src={showMode==='blocks' ? blocks:list} alt = '' onClick={()=>changeShowMode(showMode)}></img>*/}
                     </ShowHistoryMode>
-                    <LeftArrow  height={ height} className={showMode === 'blocks' ? 'hide':null}>
+                    <LeftArrow  height={ height}  color={bgColor} className={showMode === 'blocks' ? 'null':'show'}>
+
+
                         {
                             pageNum===0 ?
-                            <img src={arrow2} alt='' ></img>
+                            <i className="far fa-arrow-alt-circle-left noPage"></i>
                             :
-                            <img src={leftArrowSrc} alt='上n条' onClick={()=>showLast()}></img>
+                            <i className="far fa-arrow-alt-circle-left yesPage" onClick={()=>showLast()}></i>
+        
                         }
                     </LeftArrow>
                     <ItemContainer   className = {showMode === 'blocks'? 'blocks-mode':'multi-page-mode'} blocksWidth={blocksWidth} borderColor={bgColor}>
@@ -76,32 +75,33 @@ export const BreadcrumbUI=(
                                 bgColor={bgColor}
                                 titleColor={titleColor}
                                 hoverBgColor={hoverBgColor}
-                                onMouseOver={()=>showPageSnapshot(page.pageSnapshot,index)}
+                                onClick = {(e)=>showPageSnapshot(e,page.pageSnapshot,index)}
+                                onMouseOver={(e)=>showPageSnapshot(e,page.pageSnapshot,index)}
                                 height={ height}
                                >
                                 <Title hoverTitleColor={hoverTitleColor} 
                                        itemWidth={ showMode !== 'blocks' ? itemWidth:null}
-                                       onClick={()=>history.push({
-                                           pathname:page.path
-                                       })}
+                                       onMouseOver={e=>e.stopPropagation()}
+                                       onClick={(e)=>to(e,page.path)}
                                 >{page.title}
                                 </Title>
                                 <div className='page-snapshot'>  
-                                    <img src={loadingSrc} alt='appended-snapshot-img' className={`appended-snapshot-img-${index}`}></img>
+                                    <img src='' alt='加载中 。。。' className={`appended-snapshot-img-${index}`}></img>
                                 </div>
                                 <RemoveButton>
-                                    <img src={removeSrc} className='remove-botton' onClick={()=>deleteAhistory(page.title, page.path)} alt=''></img>
+                                    <i className="fas fa-times-circle" onClick={()=>deleteAhistory(page.title, page.path)}></i>
                                 </RemoveButton>
                             </BreadcrumbItem>
                         )
                     }
                     </ItemContainer>
-                    <RightArrow  height={ height} className={showMode === 'blocks' ? 'hide':null}> 
+                    <RightArrow  height={ height}  color={bgColor} color={bgColor} className={showMode === 'blocks' ? 'null':'show'}> 
                         {
                             (pageNum+1)*visibleItemsCount >=  historyPages.length ?
-                            <img src={arrow2} alt='' ></img>
+                            <i className="far fa-arrow-alt-circle-left noPage"></i>
                             :
-                            <img src={leftArrowSrc} alt='下n条' onClick={()=>showNext()}></img>
+                            <i className="far fa-arrow-alt-circle-left yesPage" onClick={()=>showNext()}></i>
+                           
                         }
                     </RightArrow>
                 </Breadcrumb>
