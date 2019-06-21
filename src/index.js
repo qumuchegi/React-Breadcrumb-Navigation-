@@ -39,13 +39,17 @@ export default function ReactBreadcrumbNavigation(
     const [showMode,setShowMode] = useState('horizontal')// 'horizontal' / 'blocks'
 
     const [visibleHistoryState, dispatch] = useReducer(visibleHistoryReducer,{pageNum:0})
-
+    
+    useEffect(() => {
+        refreshHistory()
+    }, [])
     useEffect(() => {
         
         //console.log(window.document)
        
         //页面加载完成之后再拍照，以免缺少一些需要异步动态渲染的部分    
         documentLoadTimer =  setTimeout(
+            
             ()=>{
                 html2Canvas(
                     document.body
