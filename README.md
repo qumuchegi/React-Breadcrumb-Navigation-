@@ -22,7 +22,7 @@ Using npm:
 
 ```js
 // 页面1、2:
-import ReactBreadcrumbNavigation from '../../../../src/index'
+import ReactBreadcrumbNavigation from 'react-breadcrumb-navigation'
 
 export function page1(props){
     return(
