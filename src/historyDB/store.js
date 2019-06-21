@@ -24,19 +24,25 @@ export default function UseHistoryDB(){
         console.log(pages)
         let noSavedSamepage = (await find_history({title,path})).length === 0
         console.log(noSavedSamepage)
-        
+        let res
         if(noSavedSamepage){
-                pages.insert({
+                await pages.insert({
                     title, path, pageSnapshot
                 },err => {
                     if(err){
                         console.log('indexDB 添加历史失败:',err)
+                        res = false
                     }else{
                         console.log('成功添加历史：',title,path,pageSnapshot)
+                        res = true
                     }
                 })
+
+                return res
         }else{
             console.log('已经存储相同页面')
+            res = false
+            return res
         }
        
 
@@ -46,9 +52,11 @@ export default function UseHistoryDB(){
     function deleteAHistory(title,path) {
         console.log( pages )
         title&&path ?
-        pages.remove({path,title},err=>{
+        pages.remove({path,title},async err=>{
             if(err){
                 console.log(err)
+            }else{
+                console.log('删除成功：',await find_history())
             }
              
         })

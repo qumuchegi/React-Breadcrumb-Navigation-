@@ -60,5 +60,5 @@ module.exports = {
          
          
     ],
-    externals:['react','react-dom','history','react-router','react-router-dom']
+    externals:[/^(react|babel-runtime)/]
 }

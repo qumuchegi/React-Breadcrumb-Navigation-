@@ -40,26 +40,26 @@ export default function ReactBreadcrumbNavigation(
 
     const [visibleHistoryState, dispatch] = useReducer(visibleHistoryReducer,{pageNum:0})
     
-    useEffect(() => {
-        refreshHistory()
-    }, [])
+   
+    
     useEffect(() => {
         
         //console.log(window.document)
-       
+        refreshHistory()
+        documentLoadTimer = null
         //页面加载完成之后再拍照，以免缺少一些需要异步动态渲染的部分    
         documentLoadTimer =  setTimeout(
-            
             ()=>{
+                 
                 html2Canvas(
                     document.body
-                ).then(async canvas => {
+                ).then( canvas => {
                     let path = history.location.pathname
                     console.log(history)
                     //if(history.action === ('PUSH' || 'POP')){
                     canvas2Image(canvas,title,path)
                     //}
-                    //refreshHistory()
+                    
                 }, err => {
                     console.log(err)
                 })
@@ -68,17 +68,22 @@ export default function ReactBreadcrumbNavigation(
             2000
         )
          return ()=>{
-             documentLoadTimer = null
+             //dropDB()
+             clearTimeout(documentLoadTimer)
          }
-    }, [historyPages.length])
+    }, [])
+ 
 
     async function refreshHistory(){
+        console.log(' 更新历史')
         let historyPages = await find_history()
         setHistoryPages(historyPages)
     }
 
-    function addHistory(title, path, pageSnapshot){
-        add_history(title, path, pageSnapshot)
+    async function addHistory(title, path, pageSnapshot){
+        let res = await add_history(title, path, pageSnapshot)
+        console.log(res)
+        return res
     }
 
     function showPageSnapshot(snapshot,index){
@@ -95,11 +100,13 @@ export default function ReactBreadcrumbNavigation(
         canvas.toBlob(imgBlob=>
             onBlob(imgBlob,title,path)
             ,'image/jpeg',0.95);
+
     }
 
-    function onBlob(imgBlob,title,path){
-        addHistory(title, path, imgBlob)
-        refreshHistory()// 更新历史
+    async function onBlob(imgBlob,title,path){
+        let hadAdded = await addHistory(title, path, imgBlob)
+        console.log(hadAdded)
+        hadAdded && refreshHistory()
     }
 
     function showLast(){
