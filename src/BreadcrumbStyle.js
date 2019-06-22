@@ -156,7 +156,7 @@ const ItemContainer  = styled.div`
     &.blocks-mode{
         position:absolute;
         z-index:10000000;
-        top:100%;
+        top:120%;
         left:0;
         width:${props=>props.blocksWidth};
         flex-wrap:wrap;

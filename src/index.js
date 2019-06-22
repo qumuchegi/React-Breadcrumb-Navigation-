@@ -1,5 +1,4 @@
 import React,{useState,useEffect,useReducer} from 'react'
-//import rasterizeHTML from 'rasterizehtml'
 import html2Canvas from 'html2canvas'
 import UseHistoryDB from './historyDB/store'
 import {BreadcrumbUI} from './BreadcrumbUI'
@@ -14,7 +13,6 @@ const visibleHistoryReducer=(state, action) => { // 管理面包屑翻页页数
 
  
 export default function ReactBreadcrumbNavigation(
-   
     {
         visibleItemsCount,// 一次显示多少条历史
         history,
@@ -27,6 +25,7 @@ export default function ReactBreadcrumbNavigation(
         height,
         itemWidth,
     } ) {
+
     var documentLoadTimer
     const {
             add_history,
@@ -36,7 +35,7 @@ export default function ReactBreadcrumbNavigation(
         } = UseHistoryDB()
 
     const [historyPages, setHistoryPages] = useState([])
-    const [showMode,setShowMode] = useState('horizontal')// 'horizontal' / 'blocks'
+    const [showMode,setShowMode] = useState('multi-page')// 'horizontal' / 'blocks'
 
     const [visibleHistoryState, dispatch] = useReducer(visibleHistoryReducer,{pageNum:0})
     
@@ -61,13 +60,13 @@ export default function ReactBreadcrumbNavigation(
                     document.body
                 ).then( canvas => {
                     let path = history.location.pathname
-                    console.log(history)
+                    //console.log(history)
                     //if(history.action === ('PUSH' || 'POP')){
                     canvas2Image(canvas,title,path)
                     //}
                     
                 }, err => {
-                    console.log(err)
+                    //console.log(err)
                 })
                 
             },
@@ -91,24 +90,24 @@ export default function ReactBreadcrumbNavigation(
     }
     
     function removeIconScript(dom_removed, parentDom){
-        console.log('删除添加的script节点：')
+        //console.log('删除添加的script节点：')
         parentDom.removeChild(dom_removed)
     }
     async function refreshHistory(){
-        console.log(' 更新历史')
+        //console.log(' 更新历史')
         let historyPages = await find_history()
         setHistoryPages(historyPages)
     }
 
     async function addHistory(title, path, pageSnapshot){
         let res = await add_history(title, path, pageSnapshot)
-        console.log(res)
+        //console.log(res)
         return res
     }
 
     function showPageSnapshot(e,snapshot,index){
 
-        console.log(snapshot)
+        //console.log(snapshot)
         let BlobReader = new FileReader()
         BlobReader.readAsDataURL(snapshot)
         BlobReader.onload = function(){
@@ -127,18 +126,18 @@ export default function ReactBreadcrumbNavigation(
 
     async function onBlob(imgBlob,title,path){
         let hadAdded = await addHistory(title, path, imgBlob)
-        console.log(hadAdded)
+        //console.log(hadAdded)
         hadAdded && refreshHistory()
     }
 
     function showLast(){
         dispatch({type:'LAST_PAGE'})
-        console.log(visibleHistoryState.pageNum)
+        //console.log(visibleHistoryState.pageNum)
     }
 
     function showNext(){
         dispatch({type:'NEXT_PAGE'})
-        console.log(visibleHistoryState.pageNum)
+        //console.log(visibleHistoryState.pageNum)
     }
     
     function deleteAhistory(title,path){

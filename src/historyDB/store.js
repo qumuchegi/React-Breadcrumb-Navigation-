@@ -21,26 +21,26 @@ export default function UseHistoryDB(){
     }, [])
  
     async function add_history( title,path,pageSnapshot ) {
-        console.log(pages)
+        //console.log(pages)
         let noSavedSamepage = (await find_history({title,path})).length === 0
-        console.log(noSavedSamepage)
+        //console.log(noSavedSamepage)
         let res
         if(noSavedSamepage){
                 await pages.insert({
                     title, path, pageSnapshot
                 },err => {
                     if(err){
-                        console.log('indexDB 添加历史失败:',err)
+                        //console.log('indexDB 添加历史失败:',err)
                         res = false
                     }else{
-                        console.log('成功添加历史：',title,path,pageSnapshot)
+                        //console.log('成功添加历史：',title,path,pageSnapshot)
                         res = true
                     }
                 })
 
                 return res
         }else{
-            console.log('已经存储相同页面')
+            //console.log('已经存储相同页面')
             res = false
             return res
         }
@@ -56,21 +56,21 @@ export default function UseHistoryDB(){
             if(err){
                 console.log(err)
             }else{
-                console.log('删除成功：',await find_history())
+                //console.log('删除成功：',await find_history())
             }
              
         })
         :
         pages.remove({},err=>{
             if(err){
-                console.log(err)
+                //console.log(err)
             }
              
         })
     }
 
     async function find_history(queryFilter={}){
-        console.log(pages)
+        //console.log(pages)
         let historyDocs = []
         if(queryFilter!=={})
         await pages.find(queryFilter).toArray( (err,pageDocs) => {
@@ -88,9 +88,9 @@ export default function UseHistoryDB(){
     
     function dropDB(){
         let history_db = new Zango( db_name, collentiosConfig )
-        console.log(history_db)
+        //console.log(history_db)
         history_db.drop(err => {
-            if(err) console.log(err)
+            if(err) {}//console.log(err)
         })
     }
 

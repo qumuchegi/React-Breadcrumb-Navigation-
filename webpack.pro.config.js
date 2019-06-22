@@ -40,7 +40,7 @@ module.exports = {
         extensions:['.js','.jsx']
     },
     plugins:[
-         
+        new CleanWebpackPlugin()
          
     ],
     externals:[/^(react|babel-runtime)/]
