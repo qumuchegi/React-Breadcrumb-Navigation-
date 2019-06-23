@@ -77,6 +77,7 @@ export const BreadcrumbUI=(
                                 hoverBgColor={hoverBgColor}
                                 onClick = {(e)=>showPageSnapshot(e,page.pageSnapshot,index)}
                                 onMouseOver={(e)=>showPageSnapshot(e,page.pageSnapshot,index)}
+                                onTouchStart={(e)=>showPageSnapshot(e,page.pageSnapshot,index)}
                                 height={ height}
                                >
                                 <Title hoverTitleColor={hoverTitleColor} 

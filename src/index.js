@@ -107,12 +107,14 @@ export default function ReactBreadcrumbNavigation(
 
     function showPageSnapshot(e,snapshot,index){
 
-        //console.log(snapshot)
+
         let BlobReader = new FileReader()
         BlobReader.readAsDataURL(snapshot)
+        let imgContainer = document.getElementsByClassName(`appended-snapshot-img-${index}`)[0]
+        if( !imgContainer.src.match(/data/))
         BlobReader.onload = function(){
-              let imgContainer = document.getElementsByClassName(`appended-snapshot-img-${index}`)[0]
-              imgContainer.src = this.result   
+            console.log('图片阅读完成')
+            imgContainer.src = this.result   
         } 
     }
 
