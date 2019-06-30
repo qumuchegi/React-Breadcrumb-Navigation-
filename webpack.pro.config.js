@@ -1,8 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     mode:'production',
@@ -40,8 +38,10 @@ module.exports = {
         extensions:['.js','.jsx']
     },
     plugins:[
-        new CleanWebpackPlugin()
-         
+        new CleanWebpackPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production') 
+          })
     ],
     externals:[/^(react|babel-runtime)/]
 }

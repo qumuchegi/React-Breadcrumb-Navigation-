@@ -1,6 +1,4 @@
-const webpack = require('webpack')
 const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
  
@@ -31,18 +29,8 @@ module.exports = {
                 use:[
 
                    'style-loader',
-                   /* {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                          // you can specify a publicPath here
-                          // by default it uses publicPath in webpackOptions.output
-                          publicPath: path.resolve(__dirname,'Dev-dist'),
-                          filename:  '[name].[hash].css',
-                          hmr: process.env.NODE_ENV === 'development',
-                        },
-                      },
-                    */
-                      'css-loader',
+                    
+                    'css-loader',
                 ]
             },
             {
@@ -81,4 +69,4 @@ module.exports = {
     },
     devtool:'source-map'
 }
-//)
+ 

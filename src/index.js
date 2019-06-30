@@ -35,7 +35,7 @@ export default function ReactBreadcrumbNavigation(
         } = UseHistoryDB()
 
     const [historyPages, setHistoryPages] = useState([])
-    const [showMode,setShowMode] = useState('multi-page')// 'horizontal' / 'blocks'
+    const [showMode,setShowMode] = useState('multi-page')// multi-page / 'blocks'
 
     const [visibleHistoryState, dispatch] = useReducer(visibleHistoryReducer,{pageNum:0})
     
@@ -45,11 +45,11 @@ export default function ReactBreadcrumbNavigation(
        return () => {
            removeIconScript(scriptDom, headDom)
        };
+       
    }, [])
     
     useEffect(() => {
         
-        //console.log(window.document)
         refreshHistory()
         documentLoadTimer = null
         //页面加载完成之后再拍照，以免缺少一些需要异步动态渲染的部分    
@@ -60,10 +60,9 @@ export default function ReactBreadcrumbNavigation(
                     document.body
                 ).then( canvas => {
                     let path = history.location.pathname
-                    //console.log(history)
-                    //if(history.action === ('PUSH' || 'POP')){
+                    
                     canvas2Image(canvas,title,path)
-                    //}
+             
                     
                 }, err => {
                     //console.log(err)
@@ -90,18 +89,18 @@ export default function ReactBreadcrumbNavigation(
     }
     
     function removeIconScript(dom_removed, parentDom){
-        //console.log('删除添加的script节点：')
+     
         parentDom.removeChild(dom_removed)
     }
     async function refreshHistory(){
-        //console.log(' 更新历史')
+      
         let historyPages = await find_history()
         setHistoryPages(historyPages)
     }
 
     async function addHistory(title, path, pageSnapshot){
         let res = await add_history(title, path, pageSnapshot)
-        //console.log(res)
+    
         return res
     }
 
@@ -128,7 +127,7 @@ export default function ReactBreadcrumbNavigation(
 
     async function onBlob(imgBlob,title,path){
         let hadAdded = await addHistory(title, path, imgBlob)
-        //console.log(hadAdded)
+   
         hadAdded && refreshHistory()
     }
 
@@ -153,8 +152,9 @@ export default function ReactBreadcrumbNavigation(
     }
 
     function changeShowMode(prevMode){
-        if(prevMode === 'horizontal') setShowMode('blocks')
-        else setShowMode('horizontal')
+         
+        if(prevMode === 'multi-page') setShowMode('blocks')
+        else setShowMode('multi-page')
     }
 
     function toPage(e,path){ 
@@ -163,6 +163,7 @@ export default function ReactBreadcrumbNavigation(
             pathname:path
         })
     }
+
     return(
         historyPages.length > 0 &&
             <BreadcrumbUI

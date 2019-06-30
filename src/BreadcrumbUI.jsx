@@ -43,12 +43,10 @@ export const BreadcrumbUI=(
                 <Breadcrumb id='breadcrumbs' height={ height } >
                     <ClearHistoryBtn height={ height} color={bgColor}>
                         <i className="fas fa-eraser" onClick={()=>clearHistory()} ></i>
-                        {/*<img src={clear} alt=' ' onClick={()=>clearHistory()}></img>*/}
-                    </ClearHistoryBtn>
+                     </ClearHistoryBtn>
                     <ShowHistoryMode height={ height} className={showMode!=='blocks'?'center':'top'} color={bgColor}>
                         <i className={showMode==='blocks'? "fas fa-th":"fas fa-th-large"} onClick={()=>changeShowMode(showMode)}></i>
-                        {/*<img src={showMode==='blocks' ? blocks:list} alt = '' onClick={()=>changeShowMode(showMode)}></img>*/}
-                    </ShowHistoryMode>
+                     </ShowHistoryMode>
                     <LeftArrow  height={ height}  color={bgColor} className={showMode === 'blocks' ? 'null':'show'}>
 
 

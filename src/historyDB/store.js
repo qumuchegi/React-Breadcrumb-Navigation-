@@ -1,30 +1,34 @@
 import {useState,useEffect} from 'react'
 import ZangoDB from 'zangodb'
 import {IndexDB_config}from '../config'
+
 const Zango = ZangoDB.Db
 const db_name = IndexDB_config.db_name
 const collections = IndexDB_config.collections
 
 var history_db , pages  
-const collentiosConfig = {}
+
+const collectionsConfig = {}
 
 export default function UseHistoryDB(){
  
-    useEffect(() => { // 连接 indexDB ,使用 ZangoDB 连接和操作 indexDB
+    useEffect(() => {  // 连接 indexDB ,使用 ZangoDB 连接和操作 indexDB
          
         collections.map(col => {
-            collentiosConfig[col.colName] = col.colSchema
+            collectionsConfig[col.colName] = col.colSchema
         });
-        history_db = new Zango( db_name, collentiosConfig )
+        history_db = new Zango( db_name, collectionsConfig )
         pages = history_db.collection(collections[0].colName)
+
         //return ()=>dropDB()
     }, [])
  
     async function add_history( title,path,pageSnapshot ) {
-        //console.log(pages)
+         
         let noSavedSamepage = (await find_history({title,path})).length === 0
-        //console.log(noSavedSamepage)
+        
         let res
+        
         if(noSavedSamepage){
                 await pages.insert({
                     title, path, pageSnapshot
@@ -44,15 +48,19 @@ export default function UseHistoryDB(){
             res = false
             return res
         }
-       
 
     }
     
-   
     function deleteAHistory(title,path) {
-        console.log( pages )
-        title&&path ?
-        pages.remove({path,title},async err=>{
+        //console.log( pages )
+        let queryFilter
+        if( title&&path ){
+            queryFilter = {path,title}
+        }else{
+            queryFilter = {}
+        }
+ 
+        pages.remove( queryFilter , err=>{
             if(err){
                 console.log(err)
             }else{
@@ -60,13 +68,7 @@ export default function UseHistoryDB(){
             }
              
         })
-        :
-        pages.remove({},err=>{
-            if(err){
-                //console.log(err)
-            }
-             
-        })
+        
     }
 
     async function find_history(queryFilter={}){
@@ -90,7 +92,9 @@ export default function UseHistoryDB(){
         let history_db = new Zango( db_name, collentiosConfig )
         //console.log(history_db)
         history_db.drop(err => {
-            if(err) {}//console.log(err)
+            if(err) {
+                throw err
+            }//console.log(err)
         })
     }
 
