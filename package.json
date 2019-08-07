@@ -1,6 +1,6 @@
 {
   "name": "react-breadcrumb-navigation",
-  "version": "1.1.16",
+  "version": "1.1.17",
   "description": "可以在React项目中使用的面包屑组件",
   "main": "lib/main.bundle.js",
   "jsnext:main": "src/index.js",
