@@ -10,16 +10,12 @@ const Breadcrumb = styled.div`
     height:${props=>props.height};
 `
 const BreadcrumbItem = styled.div`
- 
-     
-
     display:inline-block;
     box-sizing: content-box;
     position: relative;
     margin:0.3rem;
     padding:0.3rem;
     height: ${props=>props.height};
-    background-color:${props=>props.bgColor};
     color:${props=>props.titleColor};
     border-radius:0.2rem;
     border: solid 0.1rem white;
@@ -28,7 +24,7 @@ const BreadcrumbItem = styled.div`
         color:${props=>props.bgColor};
         position: relative;
         border:solid 0.1rem ${props=>props.bgColor};
-        background-color: ${props=>props.hoverBgColor};
+        
     }
 
     >.page-snapshot{
@@ -55,11 +51,7 @@ const BreadcrumbItem = styled.div`
     }
 `
 const Title = styled.div`
-    width:${props=>props.itemWidth};
-    overflow:hidden;
     white-space:nowrap;
-    text-overflow:ellipsis;
-    
     &:hover{
         color:${props=>props.hoverTitleColor};
         
@@ -67,85 +59,6 @@ const Title = styled.div`
      
 `
 
-const LeftArrow = styled.div`
-
-    display:none;
-    &.show{
-        display:block;
-    }
-    margin-left:1rem;
-    margin-right:1rem;  
-    .fas{
-        height:${props=>props.height};
-        
-        
-    }
-    .noPage{
-        color:#aaa
-    }
-    .yesPage{
-        color:${props=>props.color};
-    }
-`
-
-const RightArrow = styled.div`
-
-    display:none;
-    &.show{
-        display:block;
-    }
-    margin-left:1rem;
-    margin-right:1rem;  
-    transform:rotate(180deg);
-    .fas{
-        height:${props=>props.height};
-    }
-    .noPage{
-        color:#aaa
-    }
-    .yesPage{
-        color:${props=>props.color};
-    }
-`
-const RemoveButton = styled.div`
-    .fas{
-        position:absolute;
-        width:1rem;
-        top:-0.5rem;
-        right:-0.5rem;
-        color:red;
-    }
-    
-    
-`
-
-const ClearHistoryBtn = styled.div`
-        margin-left:1rem;
-        margin-right:1rem;  
-  .fas{
-        color:${props=>props.color};
-        width:${props=>props.height};
-        height: ${props=>props.height};
-        border-radius:${props=>props.height};
-    }
-    .fas:hover{
-        background-color:#eee
-    }
-   
-`
-
-const  ShowHistoryMode = styled.div`
-.fas{
-    color:${props=>props.color};
-    width:${props=>props.height};
-    margin-left:0.7rem;
-    height: ${props=>props.height};
-}
-.fas:hover{
-    background-color:#eee
-}
- 
-`
 const ItemContainer  = styled.div`
 
     display:flex;
@@ -167,16 +80,15 @@ const ItemContainer  = styled.div`
 
 
 `
+const Arrow = styled.span`
+    color: red
+`
 
 export  {
     Breadcrumb,
     BreadcrumbItem,
     Title,
-    LeftArrow,
-    RightArrow,
-    RemoveButton,
-    ClearHistoryBtn,
-    ShowHistoryMode,
+    Arrow,
     ItemContainer 
     
 }

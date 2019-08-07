@@ -11,10 +11,7 @@ export default function ReactPage(props){
                   visibleItemsCount = {3}
                   title='React' 
                   history={props.history} 
-                  bgColor='rgb(92,194,248)'
-                  hoverBgColor='white'
-                  titleColor='white'
-                  hoverTitleColor='rgb(234,123,123)'
+                  theme='rgb(92,194,248)'
                   blocksWidth='10rem'
                   height = '1.2rem'
                   />

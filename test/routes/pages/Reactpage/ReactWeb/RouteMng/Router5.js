@@ -11,10 +11,7 @@ export default function Router5(props){
                   visibleItemsCount = {3}
                   title='Router 5' 
                   history={props.history} 
-                  bgColor='rgb(92,194,248)'
-                  hoverBgColor='white'
-                  titleColor='white'
-                  hoverTitleColor='rgb(234,123,123)'
+                  theme='rgb(92,194,248)'
                   blocksWidth='10rem'
                   height = '1.2rem'
                   itemWidth = '3rem'

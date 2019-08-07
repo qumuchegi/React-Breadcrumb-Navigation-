@@ -3,7 +3,7 @@ export const IndexDB_config = {
     collections : [
         {
             colName:'page',
-            colSchema:[ 'title' ,'path' , 'pageSnapshot',]
+            colSchema:[ 'title' ,'path' , 'pageSnapshot', 'isHome']
         }
     ]
 }

@@ -11,25 +11,23 @@ const visibleHistoryReducer=(state, action) => { // 管理面包屑翻页页数
     }
 }
 
- 
 export default function ReactBreadcrumbNavigation(
     {
         visibleItemsCount,// 一次显示多少条历史
         history,
         title,
-        bgColor,
-        hoverBgColor,
-        titleColor,
-        hoverTitleColor,
+        theme,
         blocksWidth,
         height,
         itemWidth,
+        isHome
     } ) {
 
     var documentLoadTimer
     const {
             add_history,
             deleteAHistory,
+            deleteLastHistory,
             find_history,
             dropDB
         } = UseHistoryDB()
@@ -41,44 +39,42 @@ export default function ReactBreadcrumbNavigation(
     
    useEffect(() => {
         let {scriptDom, headDom} = addIconScript()
-
-       return () => {
-           removeIconScript(scriptDom, headDom)
-       };
+        
+        
+        return () => {
+            removeIconScript(scriptDom, headDom)
+        }
        
    }, [])
     
     useEffect(() => {
-        
-        refreshHistory()
         documentLoadTimer = null
-        //页面加载完成之后再拍照，以免缺少一些需要异步动态渲染的部分    
-        documentLoadTimer =  setTimeout(
-            ()=>{
-                 
-                html2Canvas(
-                    document.body
-                ).then( canvas => {
-                    let path = history.location.pathname
-                    
-                    canvas2Image(canvas,title,path)
-             
-                    
-                }, err => {
-                    //console.log(err)
-                })
-                
-            },
-            2000
-        )
-         return ()=>{
-             //dropDB()
-             clearTimeout(documentLoadTimer)
-         }
+        refreshHistory()
+        if (history.action === 'PUSH' || isHome) {
+            documentLoadTimer =  setTimeout(
+                ()=>{
+                    html2Canvas(
+                        document.body
+                    ).then( canvas => {
+                        let path = history.location.pathname
+                        canvas2Image(canvas,title,path,isHome)
+                    }, err => {
+                      console.log(err)
+                    })
+                },
+                100
+            )
+                return ()=>{
+                    //dropDB()
+                    clearTimeout(documentLoadTimer)
+                }
+        }
+    
+        //页面加载完成之后再拍照，以免缺少一些需要异步动态渲染的部分  
+        
     }, [])
  
     function addIconScript(){
-
         let scriptDom = document.createElement('script')
         let headDom = document.getElementsByTagName('head')[0]
         
@@ -89,56 +85,47 @@ export default function ReactBreadcrumbNavigation(
     }
     
     function removeIconScript(dom_removed, parentDom){
-     
         parentDom.removeChild(dom_removed)
     }
+
     async function refreshHistory(){
-      
-        let historyPages = await find_history()
-        setHistoryPages(historyPages)
+        let HistoryPages = await find_history()
+        setHistoryPages(HistoryPages)
     }
 
-    async function addHistory(title, path, pageSnapshot){
-        let res = await add_history(title, path, pageSnapshot)
-    
+    async function addHistory(title, path, pageSnapshot, isHome){
+        let res = await add_history(title, path, pageSnapshot, isHome)
         return res
     }
 
     function showPageSnapshot(e,snapshot,index){
-
-
         let BlobReader = new FileReader()
         BlobReader.readAsDataURL(snapshot)
         let imgContainer = document.getElementsByClassName(`appended-snapshot-img-${index}`)[0]
         if( !imgContainer.src.match(/data/))
         BlobReader.onload = function(){
-            console.log('图片阅读完成')
             imgContainer.src = this.result   
         } 
     }
 
-    function canvas2Image(canvas,title,path) {
-        
+    function canvas2Image(canvas,title,path, isHome=false) {
         canvas.toBlob(imgBlob=>
-            onBlob(imgBlob,title,path)
+            onBlob(imgBlob,title,path,isHome)
             ,'image/jpeg',0.95);
 
     }
 
-    async function onBlob(imgBlob,title,path){
-        let hadAdded = await addHistory(title, path, imgBlob)
-   
+    async function onBlob(imgBlob,title,path,isHome){
+        let hadAdded = await addHistory(title, path, imgBlob,isHome)
         hadAdded && refreshHistory()
     }
 
     function showLast(){
         dispatch({type:'LAST_PAGE'})
-        //console.log(visibleHistoryState.pageNum)
     }
 
     function showNext(){
         dispatch({type:'NEXT_PAGE'})
-        //console.log(visibleHistoryState.pageNum)
     }
     
     function deleteAhistory(title,path){
@@ -152,16 +139,16 @@ export default function ReactBreadcrumbNavigation(
     }
 
     function changeShowMode(prevMode){
-         
         if(prevMode === 'multi-page') setShowMode('blocks')
         else setShowMode('multi-page')
     }
 
-    function toPage(e,path){ 
+    function toPage(e,index,long){ 
         e.stopPropagation()
-        history.push({
-            pathname:path
+        deleteLastHistory(index).then(newHistoryPages=>{
+            history.go(1+index-long)
         })
+        
     }
 
     return(
@@ -170,10 +157,7 @@ export default function ReactBreadcrumbNavigation(
                 history = {history}
                 visibleItemsCount = {visibleItemsCount}
                 historyPages = {historyPages}
-                bgColor = {bgColor}
-                hoverBgColor = {hoverBgColor}
-                hoverTitleColor = {hoverTitleColor}
-                titleColor = {titleColor}
+                theme = {theme}
                 to = {toPage}
                 showPageSnapshot = {showPageSnapshot}
                 blocksWidth = {blocksWidth}

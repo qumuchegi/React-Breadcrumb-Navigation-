@@ -11,9 +11,7 @@ var history_db , pages
 const collectionsConfig = {}
 
 export default function UseHistoryDB(){
- 
     useEffect(() => {  // 连接 indexDB ,使用 ZangoDB 连接和操作 indexDB
-         
         collections.map(col => {
             collectionsConfig[col.colName] = col.colSchema
         });
@@ -23,60 +21,75 @@ export default function UseHistoryDB(){
         //return ()=>dropDB()
     }, [])
  
-    async function add_history( title,path,pageSnapshot ) {
-         
+    async function add_history( title,path,pageSnapshot,isHome ) {
         let noSavedSamepage = (await find_history({title,path})).length === 0
         
         let res
         
         if(noSavedSamepage){
                 await pages.insert({
-                    title, path, pageSnapshot
+                    title, path, pageSnapshot, isHome
                 },err => {
                     if(err){
-                        //console.log('indexDB 添加历史失败:',err)
                         res = false
                     }else{
-                        //console.log('成功添加历史：',title,path,pageSnapshot)
                         res = true
                     }
                 })
 
                 return res
         }else{
-            //console.log('已经存储相同页面')
             res = false
             return res
         }
-
     }
     
     function deleteAHistory(title,path) {
-        //console.log( pages )
         let queryFilter
+     
         if( title&&path ){
             queryFilter = {path,title}
         }else{
             queryFilter = {}
         }
  
-        pages.remove( queryFilter , err=>{
+        return pages.remove( queryFilter , err=>{
             if(err){
                 console.log(err)
             }else{
                 //console.log('删除成功：',await find_history())
             }
-             
         })
-        
+
+       
+    }
+
+    function deleteLastHistory(deleteStart) {
+        return new Promise((resolve, reject) => {
+            deleteOne(deleteStart)
+            async function deleteOne(deleteStart) {
+                let allHistory = await find_history()
+                if (allHistory.length!==0) {
+                    let {title, path} = allHistory[allHistory.length-1]
+                    deleteAHistory(title,path).then(async ()=>{ 
+                        allHistory = await find_history()
+                        if ( (deleteStart !== 0) ) {
+                            if ( deleteStart < allHistory.length-1 )  deleteOne(deleteStart)
+                            else resolve(allHistory) 
+                        } else if (deleteStart === 0) {
+                            if (allHistory.length === 1) return resolve(allHistory) 
+                            deleteOne(deleteStart)
+                        }
+                    } )
+                }
+            }
+        })
     }
 
     async function find_history(queryFilter={}){
-        //console.log(pages)
         let historyDocs = []
         if(queryFilter!=={})
         await pages.find(queryFilter).toArray( (err,pageDocs) => {
-             
             historyDocs = pageDocs
         })
         else
@@ -84,23 +97,21 @@ export default function UseHistoryDB(){
              
             historyDocs = pageDocs
         })
-        //console.log(historyDocs)
         return historyDocs
     }
     
     function dropDB(){
         let history_db = new Zango( db_name, collentiosConfig )
-        //console.log(history_db)
         history_db.drop(err => {
             if(err) {
                 throw err
-            }//console.log(err)
+            }
         })
     }
-
     return{
         add_history,
         deleteAHistory,
+        deleteLastHistory,
         find_history,
         dropDB
     }

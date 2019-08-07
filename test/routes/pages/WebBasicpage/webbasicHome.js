@@ -12,18 +12,15 @@ export default class WebbasicHome extends Component{
     return(
         <div>
             <div width='5rem'>
-                <ReactBreadcrumbNavigation 
-                  
+                <ReactBreadcrumbNavigation
                   visibleItemsCount = {3}
                   title='web 基础' 
                   history={this.props.history} 
-                  bgColor='rgb(92,194,248)'
-                  hoverBgColor='white'
-                  titleColor='black'
-                  hoverTitleColor='rgb(234,123,123)'
+                  theme='rgb(92,194,248)'
                   blocksWidth='10rem'
                   height = '1.2rem'
                   itemWidth = '3rem'
+                  isHome = {true}
                   />
             </div>
             <h1>web 基础</h1>
