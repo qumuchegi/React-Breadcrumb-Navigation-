@@ -2,6 +2,7 @@ import {useState,useEffect} from 'react'
 import ZangoDB from 'zangodb'
 import {IndexDB_config}from '../config'
 
+
 const Zango = ZangoDB.Db
 const db_name = IndexDB_config.db_name
 const collections = IndexDB_config.collections
@@ -23,7 +24,10 @@ export default function UseHistoryDB(){
  
     async function add_history( title,path,pageSnapshot,isHome ) {
         let noSavedSamepage = (await find_history({title,path})).length === 0
-        
+        /*
+        let curPath = history.location.pathname
+        deleteLastHistory({curPath}).then(msg=>console.log(msg))
+        */
         let res
         
         if(noSavedSamepage){
@@ -64,10 +68,14 @@ export default function UseHistoryDB(){
        
     }
 
-    function deleteLastHistory(deleteStart) {
+    function deleteLastHistory({deleteStart, curPath}) {
+        console.log({deleteStart, curPath})
         return new Promise((resolve, reject) => {
-            deleteOne(deleteStart)
-            async function deleteOne(deleteStart) {
+
+            typeof deleteStart!=undefined && deleteOneByEndIndex(deleteStart)
+            typeof curPath!=undefined && deleteOneByEndPath(curPath)
+
+            async function deleteOneByEndIndex(deleteStart) {
                 let allHistory = await find_history()
                 if (allHistory.length!==0) {
                     let {title, path} = allHistory[allHistory.length-1]
@@ -82,6 +90,22 @@ export default function UseHistoryDB(){
                         }
                     } )
                 }
+            }
+
+            async function deleteOneByEndPath(curPath) {
+                let allHistory = await find_history()
+                if(!allHistory) return
+                let endPathHistory = allHistory.findIndex( el => el.path===curPath)
+                console.log(endPathHistory)
+                let frontHistory = allHistory.slice(0, endPathHistory > 0 ?  endPathHistory + 1 : 1)
+                 
+                pages.remove({},err=>{
+                    if (!err) {
+                        pages.insert(frontHistory, err=>{
+                            if(!err ) resolve('已经55')
+                        }) 
+                    }
+                })
             }
         })
     }

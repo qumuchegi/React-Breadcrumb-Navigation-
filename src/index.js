@@ -49,27 +49,29 @@ export default function ReactBreadcrumbNavigation(
     
     useEffect(() => {
         documentLoadTimer = null
+        console.log(history.location.pathname)
+      
         refreshHistory()
-        if (history.action === 'PUSH' || isHome) {
-            documentLoadTimer =  setTimeout(
-                ()=>{
-                    html2Canvas(
-                        document.body
-                    ).then( canvas => {
-                        let path = history.location.pathname
-                        canvas2Image(canvas,title,path,isHome)
-                    }, err => {
-                      console.log(err)
-                    })
-                },
-                100
-            )
-                return ()=>{
-                    //dropDB()
-                    clearTimeout(documentLoadTimer)
-                }
-        }
     
+        documentLoadTimer =  setTimeout(
+            ()=>{
+                html2Canvas(
+                    document.body
+                ).then( canvas => {
+                    let path = history.location.pathname
+                    canvas2Image(canvas,title,path,isHome)
+                }, err => {
+                    console.log(err)
+                })
+            },
+            100
+        )
+      
+        
+        return ()=>{
+            //dropDB()
+            clearTimeout(documentLoadTimer)
+        }
         //页面加载完成之后再拍照，以免缺少一些需要异步动态渲染的部分  
         
     }, [])
@@ -95,6 +97,7 @@ export default function ReactBreadcrumbNavigation(
 
     async function addHistory(title, path, pageSnapshot, isHome){
         let res = await add_history(title, path, pageSnapshot, isHome)
+        
         return res
     }
 
@@ -117,7 +120,10 @@ export default function ReactBreadcrumbNavigation(
 
     async function onBlob(imgBlob,title,path,isHome){
         let hadAdded = await addHistory(title, path, imgBlob,isHome)
-        hadAdded && refreshHistory()
+        if (hadAdded) {
+            refreshHistory()
+            
+        }
     }
 
     function showLast(){
@@ -145,7 +151,7 @@ export default function ReactBreadcrumbNavigation(
 
     function toPage(e,index,long){ 
         e.stopPropagation()
-        deleteLastHistory(index).then(newHistoryPages=>{
+        deleteLastHistory({deleteStart: index}).then(newHistoryPages=>{
             history.go(1+index-long)
         })
         
@@ -164,7 +170,6 @@ export default function ReactBreadcrumbNavigation(
                 showLast = {showLast}
                 showNext = {showNext}
                 pageNum = {visibleHistoryState.pageNum}
-                deleteAhistory = {deleteAhistory}
                 clearHistory = {clearHistory}
                 showMode = {showMode}
                 changeShowMode = {changeShowMode}
