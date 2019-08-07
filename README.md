@@ -104,10 +104,9 @@ ReactDOM.render(
 
 参数 | 描述
 :-: | :-:
-visibleItemsCount | 必须，面包屑导航栏目分页展示，一页展示的数目为 visibleItemsCount
-title | 必须，页面标题
+title | string, 必须，页面标题
 history | 必须，获取浏览器的历史。可以使用 [history](https://www.npmjs.com/package/history) 管理历史，从中获取页面跳转信息。也可以直接使用react-router 的 `BrowserRouter`。两种方法已经在上述示例代码给出。
 height | 必须，面包屑导航组件上在页面所占高度
-itemWidth | 必须，以分页形式展示历史页面时每个标题的宽度
 blocksWidth | 将面包屑导航组件全部历史显示出来时组件的宽度
 theme | 面包屑组件主题色
+isShowPageSnapshot | boolean, 当鼠标悬停在面包屑组件上时是否显示对应的页面快照, 默认为 true

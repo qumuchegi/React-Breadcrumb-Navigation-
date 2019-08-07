@@ -20,9 +20,10 @@ export default function ReactBreadcrumbNavigation(
         blocksWidth,
         height,
         itemWidth,
-        isHome
+        isHome,
+        isShowPageSnapshot = true
     } ) {
-
+ 
     var documentLoadTimer
     const {
             add_history,
@@ -175,6 +176,7 @@ export default function ReactBreadcrumbNavigation(
                 changeShowMode = {changeShowMode}
                 height = { height}
                 itemWidth = {itemWidth}
+                isShowPageSnapshot = {isShowPageSnapshot}
             ></BreadcrumbUI>
     )
 }

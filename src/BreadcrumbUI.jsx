@@ -10,20 +10,21 @@ import {
     //HideBlocksMode
 } from './BreadcrumbStyle'
 
- 
+const pageSnapshot = index => (
+    <div className='page-snapshot'>  
+        <img src='' alt='加载中 。。。' className={`appended-snapshot-img-${index}`}></img>
+    </div>
+)
 export const BreadcrumbUI=(
     {
-        history,
-        visibleItemsCount,
         historyPages,
         theme,
         blocksWidth,
         height,
-        itemWidth,
 
         to,
         showPageSnapshot,
-        changeShowMode
+        isShowPageSnapshot
     }
 
 ) =><div> 
@@ -38,9 +39,9 @@ export const BreadcrumbUI=(
                 <BreadcrumbItem 
                     key={uuid()} 
                     titleColor={theme}
-                    onClick = {(e)=>showPageSnapshot(e,page.pageSnapshot,index)}
-                    onMouseOver={(e)=>showPageSnapshot(e,page.pageSnapshot,index)}
-                    onTouchStart={(e)=>showPageSnapshot(e,page.pageSnapshot,index)}
+                    onClick = {(e)=> isShowPageSnapshot ? showPageSnapshot(e,page.pageSnapshot,index) : null}
+                    onMouseOver={(e)=>isShowPageSnapshot ? showPageSnapshot(e,page.pageSnapshot,index) : null}
+                    onTouchStart={(e)=>isShowPageSnapshot ? showPageSnapshot(e,page.pageSnapshot,index) : null}
                     height={ height}
                     >
                     <Title 
@@ -48,9 +49,8 @@ export const BreadcrumbUI=(
                         onClick={(e)=>to(e,index, historyPages.length)}
                     >{page.title}
                     </Title>
-                    <div className='page-snapshot'>  
-                        <img src='' alt='加载中 。。。' className={`appended-snapshot-img-${index}`}></img>
-                    </div>
+                    {isShowPageSnapshot ? pageSnapshot(index): null}
+                    
                 </BreadcrumbItem>
                 </div>
                 )
