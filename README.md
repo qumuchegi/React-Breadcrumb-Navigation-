@@ -29,7 +29,6 @@ export function page1(props){
             <h1> 页面 1 </h1>
 
             <ReactBreadcrumbNavigation 
-                visibleItemsCount = {3}
                 title = '页面 1' 
                 history = {props.history}
                 titleSize = '1.2rem'
@@ -45,11 +44,11 @@ export function page2(props){
             <h1> 页面 2 </h1>
 
             <ReactBreadcrumbNavigation 
-                visibleItemsCount = {3}
                 title = '页面 2' 
                 history = {props.history} 
                 titleSize = '1.2rem'
                 itemWidth = '3rem'
+                isShowPageSnapshot = {false}
             />
         </div>
     )
@@ -98,7 +97,7 @@ ReactDOM.render(
 )
 
 ```
-当然，如果为了方便在多个页面中多次使用相同样式的面包屑组件，可以一次性配置组件，再导出到需要使用该面包屑导航组件的页面。
+当然，如果为了方便在多个页面中使用相同样式的面包屑组件，可以一次性配置组件，再导出到需要使用该面包屑导航组件的页面。
 
 ## 配置参数
 

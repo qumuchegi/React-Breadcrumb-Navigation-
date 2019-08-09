@@ -2,7 +2,6 @@ import {useState,useEffect} from 'react'
 import ZangoDB from 'zangodb'
 import {IndexDB_config}from '../config'
 
-
 const Zango = ZangoDB.Db
 const db_name = IndexDB_config.db_name
 const collections = IndexDB_config.collections
@@ -81,12 +80,13 @@ export default function UseHistoryDB(){
                     let {title, path} = allHistory[allHistory.length-1]
                     deleteAHistory(title,path).then(async ()=>{ 
                         allHistory = await find_history()
+                        console.log(allHistory.length)
                         if ( (deleteStart !== 0) ) {
-                            if ( deleteStart < allHistory.length-1 )  deleteOne(deleteStart)
+                            if ( deleteStart < allHistory.length-1 )  deleteOneByEndIndex(deleteStart)
                             else resolve(allHistory) 
                         } else if (deleteStart === 0) {
                             if (allHistory.length === 1) return resolve(allHistory) 
-                            deleteOne(deleteStart)
+                            deleteOneByEndIndex(deleteStart)
                         }
                     } )
                 }

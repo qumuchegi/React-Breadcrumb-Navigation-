@@ -38,16 +38,6 @@ export default function ReactBreadcrumbNavigation(
 
     const [visibleHistoryState, dispatch] = useReducer(visibleHistoryReducer,{pageNum:0})
     
-   useEffect(() => {
-        let {scriptDom, headDom} = addIconScript()
-        
-        
-        return () => {
-            removeIconScript(scriptDom, headDom)
-        }
-       
-   }, [])
-    
     useEffect(() => {
         documentLoadTimer = null
         console.log(history.location.pathname)
@@ -65,10 +55,9 @@ export default function ReactBreadcrumbNavigation(
                     console.log(err)
                 })
             },
-            100
+            10
         )
       
-        
         return ()=>{
             //dropDB()
             clearTimeout(documentLoadTimer)
@@ -77,20 +66,6 @@ export default function ReactBreadcrumbNavigation(
         
     }, [])
  
-    function addIconScript(){
-        let scriptDom = document.createElement('script')
-        let headDom = document.getElementsByTagName('head')[0]
-        
-        scriptDom.src = 'https://kit.fontawesome.com/e1dd5dc490.js'
-        headDom.appendChild(scriptDom)
-
-        return {scriptDom, headDom}
-    }
-    
-    function removeIconScript(dom_removed, parentDom){
-        parentDom.removeChild(dom_removed)
-    }
-
     async function refreshHistory(){
         let HistoryPages = await find_history()
         setHistoryPages(HistoryPages)
@@ -150,10 +125,11 @@ export default function ReactBreadcrumbNavigation(
         else setShowMode('multi-page')
     }
 
-    function toPage(e,index,long){ 
+    function toPage(e,index,long, path){ 
         e.stopPropagation()
-        deleteLastHistory({deleteStart: index}).then(newHistoryPages=>{
-            history.go(1+index-long)
+        deleteLastHistory({curPath: path}).then(newHistoryPages=>{
+            history.push(path)
+            //history.go(1+index-long)
         })
         
     }

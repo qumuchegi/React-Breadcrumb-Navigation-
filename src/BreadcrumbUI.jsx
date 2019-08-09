@@ -46,7 +46,7 @@ export const BreadcrumbUI=(
                     >
                     <Title 
                         onMouseOver={e=>e.stopPropagation()}
-                        onClick={(e)=>to(e,index, historyPages.length)}
+                        onClick={(e)=>to(e,index, historyPages.length, page.path)}
                     >{page.title}
                     </Title>
                     {isShowPageSnapshot ? pageSnapshot(index): null}
