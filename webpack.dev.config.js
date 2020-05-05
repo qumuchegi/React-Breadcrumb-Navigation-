@@ -27,10 +27,8 @@ module.exports = {
                 include:[path.resolve(__dirname,'test'),path.resolve(__dirname,'src')],
                 exclude:path.resolve(__dirname,'node_modules'),
                 use:[
-
                    'style-loader',
-                    
-                    'css-loader',
+                   'css-loader',
                 ]
             },
             {
